@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo pacman -Syu base-devel git xorg-server xorg-xinit libx11 libxinerama libxft webkit2gtk alacritty picom && cd ~ && git clone git@github.com:CJendantix/dwm.git && git clone https://git.suckless.org/dmenu && cd dmenu && sudo make clean install && cd ~/dwm && sudo make clean install && mkdir ~/.config/alacritty && cp ./linux-conf/alacritty.yml ~/.config/alacritty/ && cp ./linux-conf/picom.conf ~/.config/picom/ && cat ./linux-conf/.bash_profile >> ~/.bash_profile && cat ./linux-conf/.xinitrc >> ~/.xinitrc && reboot
