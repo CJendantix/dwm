@@ -75,6 +75,7 @@ static const char *volupcmd[] = { "amixer", "-q", "set", "Master", "5%+", "unmut
 static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
 static const char *miccmd[] = { "amixer", "set", "Capture", "toggle", NULL };
 static const char *screenshot[] = { "flameshot", "gui", NULL };
+static const char *fm[] = { "fm", NULL };
 
 #include <X11/XF86keysym.h>
 #include "shiftview.c"
@@ -93,7 +94,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_q,    			view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      			killclient,     {0} },
 	{ MODKEY,                       XK_t,      			setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,   		   	setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_f,   		   	spawn,      {.v = fm } },
 	{ MODKEY,                       XK_m,      			setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  			setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  			togglefloating, {0} },

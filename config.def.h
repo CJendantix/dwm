@@ -64,6 +64,7 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define PrintScreenDWM	    0x0000ff61
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -73,6 +74,8 @@ static const char *mutecmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL
 static const char *volupcmd[] = { "amixer", "-q", "set", "Master", "5%+", "unmute", NULL };
 static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
 static const char *miccmd[] = { "amixer", "set", "Capture", "toggle", NULL };
+static const char *screenshot[] = { "flameshot", "gui", NULL };
+static const char *fm[] = { "fm", NULL };
 
 #include <X11/XF86keysym.h>
 #include "shiftview.c"
@@ -91,7 +94,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_q,    			view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      			killclient,     {0} },
 	{ MODKEY,                       XK_t,      			setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,   		   	setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_f,   		   	setlayout,      {.v = fm },
 	{ MODKEY,                       XK_m,      			setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  			setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  			togglefloating, {0} },
@@ -101,11 +104,12 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, 			focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  			tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, 			tagmon,         {.i = +1 } },
-	{ Mod1Mask,             		XK_Tab,    			altTabStart,	{0} },
-	{ MODKEY,                       XK_minus,  			setgaps,	{.i = -1 } },
+	{ Mod1Mask,             	XK_Tab,    			altTabStart,	{0} },
+	{ MODKEY,                       XK_minus,  			setgaps,		{.i = -1 } },
 	{ MODKEY,                       XK_equal,			setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,			setgaps,        {.i = 0  } },
-	{ 0,                            XF86XK_AudioMute,			spawn,		{.v = mutecmd } },
+	{ 0,    			PrintScreenDWM,    		spawn,          {.v = screenshot } },
+	{ 0,                            XF86XK_AudioMute,		spawn,		{.v = mutecmd } },
 	{ 0,                            XF86XK_AudioLowerVolume,	spawn, 		{.v = voldowncmd } },
 	{ 0,                            XF86XK_AudioRaiseVolume,	spawn, 		{.v = volupcmd } },
 	{ MODKEY,			XK_Left,   			shiftview,	{ .i = -1 } },
